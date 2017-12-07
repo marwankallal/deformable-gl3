@@ -53,13 +53,13 @@
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\..\..\common;$(IncludePath);$(ProjectDir);$(ProjectDir)\GL;</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\..\..\common;$(IncludePath);$(ProjectDir);$(ProjectDir)\GL;$(ProjectDir)\inc;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(ProjectDir)lib;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)\..\..\common;$(IncludePath);$(ProjectDir);$(ProjectDir)\GL;</IncludePath>
+    <IncludePath>$(ProjectDir)\..\..\common;$(IncludePath);$(ProjectDir);$(ProjectDir)\GL;$(ProjectDir)\inc;</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(ProjectDir)lib;</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -103,37 +103,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="geometry.cpp" />
-    <ClCompile Include="glsupport.cpp" />
-    <ClCompile Include="material.cpp" />
-    <ClCompile Include="picker.cpp" />
-    <ClCompile Include="ppm.cpp" />
-    <ClCompile Include="renderstates.cpp" />
-    <ClCompile Include="scenegraph.cpp" />
-    <ClCompile Include="texture.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="arcball.h" />
-    <ClInclude Include="asstcommon.h" />
-    <ClInclude Include="cvec.h" />
-    <ClInclude Include="drawer.h" />
-    <ClInclude Include="geometry.h" />
-    <ClInclude Include="geometrymaker.h" />
-    <ClInclude Include="glsupport.h" />
-    <ClInclude Include="material.h" />
-    <ClInclude Include="matrix4.h" />
-    <ClInclude Include="mesh.h" />
-    <ClInclude Include="picker.h" />
-    <ClInclude Include="ppm.h" />
-    <ClInclude Include="quat.h" />
-    <ClInclude Include="renderstates.h" />
-    <ClInclude Include="rigtform.h" />
-    <ClInclude Include="scenegraph.h" />
-    <ClInclude Include="texture.h" />
-    <ClInclude Include="uniforms.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="shaders\basic-gl2.vshader" />
     <None Include="shaders\basic-gl3.vshader" />
     <None Include="shaders\diffuse-gl2.fshader" />
@@ -146,6 +115,38 @@
     <None Include="shaders\normal-gl3.vshader">
       <FileType>Document</FileType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\arcball.h" />
+    <ClInclude Include="inc\asstcommon.h" />
+    <ClInclude Include="inc\cvec.h" />
+    <ClInclude Include="inc\drawer.h" />
+    <ClInclude Include="inc\geometry.h" />
+    <ClInclude Include="inc\geometrymaker.h" />
+    <ClInclude Include="inc\glsupport.h" />
+    <ClInclude Include="inc\material.h" />
+    <ClInclude Include="inc\matrix4.h" />
+    <ClInclude Include="inc\mesh.h" />
+    <ClInclude Include="inc\picker.h" />
+    <ClInclude Include="inc\ppm.h" />
+    <ClInclude Include="inc\quat.h" />
+    <ClInclude Include="inc\renderstates.h" />
+    <ClInclude Include="inc\rigtform.h" />
+    <ClInclude Include="inc\scenegraph.h" />
+    <ClInclude Include="inc\sgutils.h" />
+    <ClInclude Include="inc\texture.h" />
+    <ClInclude Include="inc\uniforms.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\geometry.cpp" />
+    <ClCompile Include="src\glsupport.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\material.cpp" />
+    <ClCompile Include="src\picker.cpp" />
+    <ClCompile Include="src\ppm.cpp" />
+    <ClCompile Include="src\renderstates.cpp" />
+    <ClCompile Include="src\scenegraph.cpp" />
+    <ClCompile Include="src\texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

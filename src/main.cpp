@@ -327,7 +327,7 @@ static void initRobots() {
 
 // New function that loads the bunny mesh and initializes the bunny shell meshes
 static void initBunnyMeshes() {
-	g_bunnyMesh.load("bunny.mesh");
+	g_bunnyMesh.load("resources/bunny.mesh");
 
 	// Init the per vertex normal of g_bunnyMesh; see "calculating normals"
 	// section of spec
@@ -1089,8 +1089,8 @@ static void initMaterials() {
 
 	// normal mapping material
 	g_bumpFloorMat.reset(new Material("./shaders/normal-gl3.vshader", "./shaders/normal-gl3.fshader"));
-	g_bumpFloorMat->getUniforms().put("uTexColor", shared_ptr<ImageTexture>(new ImageTexture("Fieldstone.ppm", true)));
-	g_bumpFloorMat->getUniforms().put("uTexNormal", shared_ptr<ImageTexture>(new ImageTexture("FieldstoneNormal.ppm", false)));
+	g_bumpFloorMat->getUniforms().put("uTexColor", shared_ptr<ImageTexture>(new ImageTexture("resources/Fieldstone.ppm", true)));
+	g_bumpFloorMat->getUniforms().put("uTexNormal", shared_ptr<ImageTexture>(new ImageTexture("resources/FieldstoneNormal.ppm", false)));
 
 	// copy solid prototype, and set to wireframed rendering
 	g_arcballMat.reset(new Material(solid));
@@ -1111,7 +1111,7 @@ static void initMaterials() {
 		.put("uColorDiffuse", Cvec3f(0.2f, 0.2f, 0.2f));
 
 	// bunny shell materials;
-	shared_ptr<ImageTexture> shellTexture(new ImageTexture("shell.ppm", false)); // common shell texture
+	shared_ptr<ImageTexture> shellTexture(new ImageTexture("resources/shell.ppm", false)); // common shell texture
 
 																				 // needs to enable repeating of texture coordinates
 	shellTexture->bind();

@@ -13,91 +13,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ppm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="glsupport.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="picker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="scenegraph.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="geometry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="material.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="renderstates.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="arcball.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="asstcommon.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="drawer.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="geometry.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="material.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="mesh.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="picker.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="quat.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="renderstates.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="rigtform.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="scenegraph.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="texture.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="uniforms.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cvec.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="geometrymaker.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="glsupport.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="matrix4.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="ppm.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="shaders\basic-gl3.vshader">
       <Filter>Shaders</Filter>
     </None>
@@ -122,5 +37,93 @@
     <None Include="shaders\normal-gl3.vshader">
       <Filter>Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\arcball.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\asstcommon.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\cvec.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\drawer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\geometry.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\geometrymaker.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\glsupport.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\material.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\matrix4.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\mesh.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\picker.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\ppm.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\quat.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\renderstates.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\rigtform.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\scenegraph.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\sgutils.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\texture.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\uniforms.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\geometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glsupport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\picker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ppm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderstates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenegraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
