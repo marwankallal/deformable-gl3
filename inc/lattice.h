@@ -3,6 +3,7 @@
 
 #include "particle.h"
 #include "mesh.h"
+#include "boundingbox.h"
 
 class Lattice {
 
@@ -17,12 +18,14 @@ public:
 
 	void create_lattice(Mesh mesh) {
 		orig_mesh = mesh;
-		bounding_box_t bbox = get_lattice_bounds(mesh);
+		BoundingBox bbox = get_lattice_bounds(mesh);
+
+
 	}
 
 private:
-	bounding_box_t get_lattice_bounds(Mesh mesh) {
-		bounding_box_t bbox = { 0 };
+	BoundingBox get_lattice_bounds(Mesh mesh) {
+		BoundingBox bbox = { 0 };
 		for (int i = 0; i < mesh.getNumVertices(); i++) {
 			if (mesh.getVertex(i).getPosition()[0] > bbox.x_max) {
 				bbox.x_max = mesh.getVertex(i).getPosition()[0];
@@ -44,6 +47,7 @@ private:
 			}
 		}
 
+		//round up to allow proper cube voxels
 		bbox.x_max = ceil((bbox.x_max / PARTICLE_SIZE)) * PARTICLE_SIZE;
 		bbox.y_max = ceil((bbox.y_max / PARTICLE_SIZE)) * PARTICLE_SIZE;
 		bbox.z_max = ceil((bbox.z_max / PARTICLE_SIZE)) * PARTICLE_SIZE;

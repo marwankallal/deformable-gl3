@@ -6,5 +6,6 @@
 
 class Particle {
 	Cvec3 position;
+	BoundingBox bbox;
 	Mesh::Vertex vertex;
 };

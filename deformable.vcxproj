@@ -119,6 +119,7 @@
   <ItemGroup>
     <ClInclude Include="inc\arcball.h" />
     <ClInclude Include="inc\asstcommon.h" />
+    <ClInclude Include="inc\boundingbox.h" />
     <ClInclude Include="inc\cvec.h" />
     <ClInclude Include="inc\drawer.h" />
     <ClInclude Include="inc\geometry.h" />
