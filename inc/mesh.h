@@ -8,6 +8,15 @@
 
 #include "cvec.h"
 
+struct bounding_box_t {
+	float x_max;
+	float x_min;
+	float y_max;
+	float y_min;
+	float z_max;
+	float z_min;
+};
+
 class Mesh {
   typedef int vertex_index;
   typedef int edge_index;

@@ -124,9 +124,11 @@
     <ClInclude Include="inc\geometry.h" />
     <ClInclude Include="inc\geometrymaker.h" />
     <ClInclude Include="inc\glsupport.h" />
+    <ClInclude Include="inc\lattice.h" />
     <ClInclude Include="inc\material.h" />
     <ClInclude Include="inc\matrix4.h" />
     <ClInclude Include="inc\mesh.h" />
+    <ClInclude Include="inc\particle.h" />
     <ClInclude Include="inc\picker.h" />
     <ClInclude Include="inc\ppm.h" />
     <ClInclude Include="inc\quat.h" />

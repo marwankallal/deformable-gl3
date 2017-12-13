@@ -96,6 +96,12 @@
     <ClInclude Include="inc\uniforms.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="inc\particle.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\lattice.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\geometry.cpp">
