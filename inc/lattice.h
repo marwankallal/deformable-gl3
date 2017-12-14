@@ -8,6 +8,7 @@
 class Lattice {
 
 	std::vector<std::vector<std::vector<Particle> > > particles;
+	Cvec3 size;
 	Mesh orig_mesh;
 
 public:
@@ -20,12 +21,17 @@ public:
 		orig_mesh = mesh;
 		BoundingBox bbox = get_lattice_bounds(mesh);
 
+		//calculate size
+		size[0] = (bbox.x_max - bbox.x_min) / PARTICLE_SIZE;
+		size[1] = (bbox.y_max - bbox.y_min) / PARTICLE_SIZE;
+		size[2] = (bbox.z_max - bbox.z_min) / PARTICLE_SIZE;
+
 		// resize vectors for easy access
-		particles.resize((bbox.x_max - bbox.x_min) / PARTICLE_SIZE);
-		for (int i = 0; i < (bbox.y_max - bbox.y_min) / PARTICLE_SIZE; i++) {
-			particles[i].resize((bbox.y_max - bbox.y_min) / PARTICLE_SIZE);
-			for (int j = 0; j < (bbox.z_max - bbox.z_min) / PARTICLE_SIZE; j++) {
-				particles[i][j].resize((bbox.z_max - bbox.z_min) / PARTICLE_SIZE);
+		particles.resize(size[0]);
+		for (int i = 0; i < size[0]; i++) {
+			particles[i].resize(size[1]);
+			for (int j = 0; j < (size[1]) / PARTICLE_SIZE; j++) {
+				particles[i][j].resize(size[2]);
 			}
 		}
 
@@ -38,6 +44,11 @@ public:
 						k - ((bbox.z_max - bbox.z_min) / 2) * PARTICLE_SIZE);
 				}
 			}
+		}
+
+		for(p = 0; p < )
+		for (int f = 0; f < mesh.getNumFaces(); f++) {
+			
 		}
 
 	}
