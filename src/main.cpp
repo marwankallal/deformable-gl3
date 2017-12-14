@@ -41,6 +41,7 @@
 #include "picker.h"
 #include "geometry.h"
 #include "mesh.h"
+#include "lattice.h"
 
 using namespace std;
 using namespace tr1;
@@ -1309,6 +1310,8 @@ int main(int argc, char * argv[]) {
 		initScene();
 		initAnimation();
 		initSimulation();
+
+		Lattice bunny_lattice = Lattice(g_bunnyMesh);
 
 		glutMainLoop();
 		return 0;

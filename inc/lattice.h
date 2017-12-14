@@ -3,7 +3,6 @@
 
 #include "particle.h"
 #include "mesh.h"
-#include "boundingbox.h"
 
 class Lattice {
 
@@ -30,7 +29,10 @@ public:
 		particles.resize(size[0]);
 		for (int i = 0; i < size[0]; i++) {
 			particles[i].resize(size[1]);
-			for (int j = 0; j < (size[1]) / PARTICLE_SIZE; j++) {
+		}
+
+		for (int i = 0; i < size[0]; i++) {
+			for (int j = 0; j < (size[1]); j++) {
 				particles[i][j].resize(size[2]);
 			}
 		}
@@ -45,12 +47,6 @@ public:
 				}
 			}
 		}
-
-		for(p = 0; p < )
-		for (int f = 0; f < mesh.getNumFaces(); f++) {
-			
-		}
-
 	}
 
 private:

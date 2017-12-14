@@ -1,6 +1,7 @@
 #include "cvec.h"
 #include "matrix4.h"
 #include "mesh.h"
+#include "boundingbox.h"
 
 #define PARTICLE_SIZE (float)0.1
 
