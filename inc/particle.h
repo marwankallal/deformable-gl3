@@ -5,7 +5,15 @@
 #define PARTICLE_SIZE (float)0.1
 
 class Particle {
+	
+public:
+
 	Cvec3 position;
 	BoundingBox bbox;
-	Mesh::Vertex vertex;
+	Mesh::Vertex *vertex;
+	bool active;
+
+	Particle() {
+		active = false;
+	}
 };

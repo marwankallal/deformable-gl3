@@ -7,7 +7,7 @@
 
 class Lattice {
 
-	std::vector<Particle> particles;
+	std::vector<std::vector<std::vector<Particle> > > particles;
 	Mesh orig_mesh;
 
 public:
@@ -20,6 +20,25 @@ public:
 		orig_mesh = mesh;
 		BoundingBox bbox = get_lattice_bounds(mesh);
 
+		// resize vectors for easy access
+		particles.resize((bbox.x_max - bbox.x_min) / PARTICLE_SIZE);
+		for (int i = 0; i < (bbox.y_max - bbox.y_min) / PARTICLE_SIZE; i++) {
+			particles[i].resize((bbox.y_max - bbox.y_min) / PARTICLE_SIZE);
+			for (int j = 0; j < (bbox.z_max - bbox.z_min) / PARTICLE_SIZE; j++) {
+				particles[i][j].resize((bbox.z_max - bbox.z_min) / PARTICLE_SIZE);
+			}
+		}
+
+		//initialize positions
+		for (int i = 0; i < particles.size(); i++) {
+			for (int j = 0; j < particles[0].size(); j++) {
+				for (int k = 0; k < particles[0][0].size(); k++) {
+					particles[i][j][k].position = Cvec3(i - ((bbox.x_max - bbox.x_min) / 2) * PARTICLE_SIZE,
+						j - ((bbox.y_max - bbox.y_min) / 2) * PARTICLE_SIZE,
+						k - ((bbox.z_max - bbox.z_min) / 2) * PARTICLE_SIZE);
+				}
+			}
+		}
 
 	}
 
