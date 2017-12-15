@@ -55,6 +55,9 @@ public:
 				}
 			}
 		}
+
+		//for this example, one particle will be deforming
+		particles[0][0][0].goal_position[2] += 3;
 	}
 
 private:

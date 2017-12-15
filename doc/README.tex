@@ -1,0 +1,59 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{url}
+\begin{document}
+	\title{Deformable Objects Using Fast Lattice Shape Matching}
+	\author{Marwan Kallal}
+	\date{}
+	\maketitle
+	
+	\section{Introduction}
+	I attempted to use the paper by Alec R. Rivers and Doug L. James, explaining Fast Lattice Shape Matching (FLSM), to make our already fuzzy bunny deformable as well. I have omitted collision and other physics in the interest of time and am focusing on the deformations as single points move. I will also be using the unoptimized version SLSM (Slow LSM), to focus on the way that deformations happen.
+	
+	\section{Explanation of FLSM}
+	\subsection{Constructing the Lattice}
+	The first step to FLSM is to build a lattice, or grid, that encloses the mesh. We start by creating a bounding box around the mesh. From here we round the dimensions of the bounding box up to fit an integral number of grid squares. From here we need to check which grid squares are actually in contact with the inside of the mesh. We can do this using a triangle mesh voxelization algorithm [Rosenburg]. 
+	
+	\subsection{Creating Particles}
+	particles happen
+	
+	\subsubsection{Assigning Vertices}
+	give particles vertices
+	
+	\subsection{Creating Regions}
+	make regions
+	
+	\subsection{Dynamics}
+	stuff moves
+	
+	\subsubsection{Particle Movement}
+	particles move
+	
+	\subsubsection{Region Movement}
+	regions move
+	
+	\subsubsection{Setting Particle Positions}
+	you put them there
+	
+	\section{My Implementation}
+	\begin{lstlisting}[language=C++]
+	int i = 0;
+	\end{lstlisting}
+	
+	\section{Challenges}
+	doesnt work
+	
+	\section{Optimizations}
+	make faster
+	
+	\bibliography{README}
+	\bibliographystyle{plainnat}
+	
+	
+\end{document}

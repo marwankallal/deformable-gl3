@@ -12,6 +12,7 @@ class Particle {
 public:
 
 	Cvec3 position;
+	Cvec3 goal_position;
 	Cvec3 displacement = Cvec3();
 	Cvec3 force = Cvec3();
 	Cvec3 velocity = Cvec3();
@@ -25,6 +26,7 @@ public:
 	}
 
 	void setPosition(Cvec3 pos, Mesh mesh) {
+
 		position = pos;
 		bbox.x_max = pos[0] + PARTICLE_SIZE / 2;
 		bbox.x_min = pos[0] - PARTICLE_SIZE / 2;
@@ -48,20 +50,32 @@ class Region {
 public:
 
 	Matrix4 displacement;
+	Cvec3 com;
+	Cvec3 goal_com;
 	Cvec3 center_idx;
+	std::vector<Particle*> particles;
 	int w = 1;
 
-	Region(Cvec3 cen_idx, std::vector<std::vector<std::vector<Particle> > > *particles) {
+	Region(Cvec3 cen_idx, std::vector<std::vector<std::vector<Particle> > > *_particles) {
 		center_idx = cen_idx;
 
 		//add self to relevent particles
 		for (int i = center_idx[0] - 1; i < center_idx[0] + 2; i++) {
 			for (int j = center_idx[1] - 1; j < center_idx[1] + 2; j++) {
 				for (int k = center_idx[2] - 1; k < center_idx[2] + 2; k++) {
-					(*particles)[i][j][k].regions.push_back(this);
+					(*_particles)[i][j][k].regions.push_back(this);
+					particles.push_back(&(*_particles)[i][j][k]);
+					com += (*_particles)[i][j][k].position;
 				}
 			}
 		}
+	}
 
+	Cvec3 calculate_goal_com() {
+		goal_com = Cvec3();
+		for each (Particle* p in particles) {
+			goal_com += p->goal_position;
+		}
+		goal_com /= particles.size();
 	}
 };
