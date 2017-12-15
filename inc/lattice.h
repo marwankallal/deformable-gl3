@@ -7,6 +7,7 @@
 class Lattice {
 
 	std::vector<std::vector<std::vector<Particle> > > particles;
+	std::vector<Region> regions;
 	Cvec3 size;
 	Mesh orig_mesh;
 
@@ -41,9 +42,16 @@ public:
 		for (int i = 0; i < particles.size(); i++) {
 			for (int j = 0; j < particles[0].size(); j++) {
 				for (int k = 0; k < particles[0][0].size(); k++) {
-					particles[i][j][k].position = Cvec3(i - ((bbox.x_max - bbox.x_min) / 2) * PARTICLE_SIZE,
+					particles[i][j][k].setPosition(Cvec3(i - ((bbox.x_max - bbox.x_min) / 2) * PARTICLE_SIZE,
 						j - ((bbox.y_max - bbox.y_min) / 2) * PARTICLE_SIZE,
-						k - ((bbox.z_max - bbox.z_min) / 2) * PARTICLE_SIZE);
+						k - ((bbox.z_max - bbox.z_min) / 2) * PARTICLE_SIZE), mesh);
+
+					//generate regions and assign
+					if (i > 0 && i < size[0] - 1 &&
+						j > 0 && j < size[1] - 1 &&
+						k > 0 && k < size[2] - 1) {
+						regions.push_back(Region(Cvec3(i,j,k), &particles));
+					}
 				}
 			}
 		}
