@@ -18,16 +18,16 @@
 	
 	\section{Explanation of FLSM}
 	\subsection{Constructing the Lattice}
-	The first step to FLSM is to build a lattice, or grid, that encloses the mesh. We start by creating a bounding box around the mesh. From here we round the dimensions of the bounding box up to fit an integral number of grid squares. From here we need to check which grid squares are actually in contact with the inside of the mesh. We can do this using a triangle mesh voxelization algorithm [Rosenburg]. 
+	The first step to FLSM is to build a lattice, or grid, that encloses the mesh. We start by creating a bounding box around the mesh. From here we round the dimensions of the bounding box up to fit an integral number of grid squares. Each grid square has an associated particle which will be used for movement and other calculations.  
 	
 	\subsection{Creating Particles}
-	particles happen
+	From here we need to check which grid squares are actually in contact with the inside of the mesh. We can do this using a triangle mesh voxelization algorithm [Rosenburg]. Each particle will have a mass associated with it to properly simulate physical responses. To differentiate between inner and outer particles, we can set the particle mass of outside particles to 0.
 	
 	\subsubsection{Assigning Vertices}
-	give particles vertices
+	Now that we have our grid and particles, we can assign vertices to their associated particles. This allows us to move the vertices of the mesh as the particles move, essentially sharing the transform of the particle with that vertex. To do this, we can iterate through the vertices of the mesh, and calculate which grid square they lie in. We can then assign that vertex to the particle in that grid square.
 	
 	\subsection{Creating Regions}
-	make regions
+	Shape matching regions make up the building blocks of the deformation system.
 	
 	\subsection{Dynamics}
 	stuff moves
@@ -52,8 +52,8 @@
 	\section{Optimizations}
 	make faster
 	
-	\bibliography{README}
-	\bibliographystyle{plainnat}
+	\section{Works Cited}
+	Rivers, Alec R., and Doug L. James. "FastLSM: Fast Lattice Shape Matching for Robust Real-Time Deformation." \textit{ACM Transactions on Graphics}, vol. 26, no. 3, 2007, pp
 	
 	
 \end{document}
