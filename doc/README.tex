@@ -1,4 +1,5 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt,a4paper]{amsart}
+\usepackage[margin=1in]{geometry}
 \usepackage[latin1]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -10,50 +11,57 @@
 \begin{document}
 	\title{Deformable Objects Using Fast Lattice Shape Matching}
 	\author{Marwan Kallal}
-	\date{}
+	\date{December 17, 2017}
 	\maketitle
 	
 	\section{Introduction}
-	I attempted to use the paper by Alec R. Rivers and Doug L. James, explaining Fast Lattice Shape Matching (FLSM), to make our already fuzzy bunny deformable as well. I have omitted collision and other physics in the interest of time and am focusing on the deformations as single points move. I will also be using the unoptimized version SLSM (Slow LSM), to focus on the way that deformations happen.
+	I attempt to use the results of Rivers and James \cite{rivers} on Fast Lattice Shape Matching (FLSM) to make our already fuzzy bunny deformable as well. I have omitted collision and other physics in the interest of time and am focusing on  deformations upon movements of single particle masses. I will also be using the unoptimized version SLSM (Slow LSM), to focus on the dynamics of these deformations.
 	
 	\section{Explanation of FLSM}
 	\subsection{Constructing the Lattice}
 	The first step to FLSM is to build a lattice, or grid, that encloses the mesh. We start by creating a bounding box around the mesh. From here we round the dimensions of the bounding box up to fit an integral number of grid squares. Each grid square has an associated particle which will be used for movement and other calculations.  
 	
 	\subsection{Creating Particles}
-	From here we need to check which grid squares are actually in contact with the inside of the mesh. We can do this using a triangle mesh voxelization algorithm [Rosenburg]. Each particle will have a mass associated with it to properly simulate physical responses. To differentiate between inner and outer particles, we can set the particle mass of outside particles to 0.
+	From here we need to check which grid squares are actually in contact with the inside of the mesh. We can do this using a standard triangle mesh voxelization algorithm \cite{rosen}. Each particle will have a mass associated with it to properly simulate physical responses. To differentiate between inner and outer particles, we can set the particle mass of outside particles to 0.
 	
 	\subsubsection{Assigning Vertices}
 	Now that we have our grid and particles, we can assign vertices to their associated particles. This allows us to move the vertices of the mesh as the particles move, essentially sharing the transform of the particle with that vertex. To do this, we can iterate through the vertices of the mesh, and calculate which grid square they lie in. We can then assign that vertex to the particle in that grid square.
 	
 	\subsection{Creating Regions}
-	Shape matching regions make up the building blocks of the deformation system.
+	Shape matching regions make up the building blocks of the deformation system. We start by specifying a region half-width $w$. This region size will also change the dynamic properties of the mesh, with larger regions making the mesh stiffer. This is because the way that region center of mass is calculated, and therefore the final rotations of the regions will be smaller with the displaced particles having less weight relative to the total. Using masses of 0 for particles outside the mesh is important for making sure that their potential movement doesn't affect the deformation of the object. The regions will also overlap to make sure that the object doesn't flop around and fall apart. We can make a region centered around every particle as long as no part of the region exceeds the range of the bounding box (and thus the lattice we constructed).
 	
 	\subsection{Dynamics}
-	stuff moves
 	
 	\subsubsection{Particle Movement}
-	particles move
+	Particles are affected by outside forces such as gravity and collisions. This creates movement among the particles, which will then move regions, affecting the final resting position of the particles for that timestep. 
 	
 	\subsubsection{Region Movement}
-	regions move
+	When particles move, this changes the center of mass of the regions. In order to move the region properly and assign goal positions, we need to know both the original center of mass of the region $\bold{c}_r^0$ and the newly deformed one $\bold{c}_r$. We can calculate them both for each region using:
+	
+	\[ \frac{1}{Region Total Mass} \sum_{i \in Region Particles} \tilde{m}_i \bold{x}_i\]
+	
+	Now we must find a way to rotate and translate the regions in a way that preserves the shape of the particles within the region as much as possible.\cite{rivers} proposes an approximation of the least squares rotation given the position of the deformed particles relative to the original region. This method uses an intermediate matrix value $\bold{A_r}$ (shown below) and then a polar decomposition to extract the rotational component.
+	
+	\[ \bold{A_r} = \sum_{i \in Region} \tilde{m}_i ( \bold{x}_i - \bold{c}_r ) ( \bold{x}_i^0 - \bold{c}_r^0 )^\top \]
+	
+	From here we can take the polar decomposition of $\bold{A_r}$ to obtain the rotational component, $\bold{R_{r}}$. To get the final transformation we need for the region, we use the two centers of mass we found earlier, $\bold{c}_r^0$ and $\bold{c}_r$, and our newly obtained $\bold{A_r}$, as shown below:
+	
+	\[ \bold{T}_r = [\bold{R}_r (\bold{c_r} - \bold{R}_r \bold{c}_r^0) ] \]
 	
 	\subsubsection{Setting Particle Positions}
-	you put them there
 	
-	\section{My Implementation}
-	\begin{lstlisting}[language=C++]
-	int i = 0;
-	\end{lstlisting}
+	Because we know the regions which each particle belongs to, we can place a goal position $\bold{g}$ using the average of the transformations for the regions containing it. We can then use the relative distance between original and goal positions of the particles, as well as the outside forces mentioned above, to find the velocities and then final positions of the particles as shown below.
 	
-	\section{Challenges}
-	doesnt work
+	\[ \bold{v}(t+h) = \bold{v}(t) + \frac{\bold{g}(t) - \bold{x}(t)}{h} + h \frac{\bold{Forces}(t)}{m} \]
+	
+	\[ \bold{x}(t+h) = \bold{x}(t) + h \bold{v}(t + h) \]
 	
 	\section{Optimizations}
-	make faster
+	There are many potential optimizations we can make, many of them included in the \cite{rivers} paper.
+	\subsection{Fast Summation}
+	The main breakthrough of the paper was the introduction of a fast summation algorithm that stores as much information as possible to be reused in future computations. This has an especially large impact because of the reuse of sets of particles within each region.
 	
-	\section{Works Cited}
-	Rivers, Alec R., and Doug L. James. "FastLSM: Fast Lattice Shape Matching for Robust Real-Time Deformation." \textit{ACM Transactions on Graphics}, vol. 26, no. 3, 2007, pp
-	
+	\bibliographystyle{plainnat}
+	\bibliography{references}
 	
 \end{document}
