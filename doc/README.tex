@@ -36,28 +36,29 @@
 	Particles are affected by outside forces such as gravity and collisions. This creates movement among the particles, which will then move regions, affecting the final resting position of the particles for that timestep. 
 	
 	\subsubsection{Region Movement}
-	When particles move, this changes the center of mass of the regions. In order to move the region properly and assign goal positions, we need to know both the original center of mass of the region $\bold{c}_r^0$ and the newly deformed one $\bold{c}_r$. We can calculate them both for each region using:
+	When particles move, this changes the center of mass of the regions. In order to move the region properly and assign goal positions, we need to know both the original center of mass of the region $\mathbf{c}_r^0$ and the newly deformed one $\mathbf{c}_r$. We can calculate them both for each region using:
 	
-	\[ \frac{1}{Region Total Mass} \sum_{i \in Region Particles} \tilde{m}_i \bold{x}_i\]
+	\[ \frac{1}{Region Total Mass} \sum_{i \in Region Particles} \tilde{m}_i \mathbf{x}_i\]
 	
-	Now we must find a way to rotate and translate the regions in a way that preserves the shape of the particles within the region as much as possible.\cite{rivers} proposes an approximation of the least squares rotation given the position of the deformed particles relative to the original region. This method uses an intermediate matrix value $\bold{A_r}$ (shown below) and then a polar decomposition to extract the rotational component.
+	Now we must find a way to rotate and translate the regions in a way that preserves the shape of the particles within the region as much as possible.\cite{rivers} proposes an approximation of the least squares rotation given the position of the deformed particles relative to the original region. This method uses an intermediate matrix value $\mathbf{A_r}$ (shown below) and then a polar decomposition to extract the rotational component.
 	
-	\[ \bold{A_r} = \sum_{i \in Region} \tilde{m}_i ( \bold{x}_i - \bold{c}_r ) ( \bold{x}_i^0 - \bold{c}_r^0 )^\top \]
+	\[ \mathbf{A_r} = \sum_{i \in Region} \tilde{m}_i ( \mathbf{x}_i - \mathbf{c}_r ) ( \mathbf{x}_i^0 - \mathbf{c}_r^0 )^\top \]
 	
-	From here we can take the polar decomposition of $\bold{A_r}$ to obtain the rotational component, $\bold{R_{r}}$. To get the final transformation we need for the region, we use the two centers of mass we found earlier, $\bold{c}_r^0$ and $\bold{c}_r$, and our newly obtained $\bold{A_r}$, as shown below:
+	From here we can take the polar decomposition of $\mathbf{A_r}$ to obtain the rotational component, $\mathbf{R_{r}}$. To get the final transformation we need for the region, we use the two centers of mass we found earlier, $\mathbf{c}_r^0$ and $\mathbf{c}_r$, and our newly obtained $\mathbf{A_r}$, as shown below:
 	
-	\[ \bold{T}_r = [\bold{R}_r (\bold{c_r} - \bold{R}_r \bold{c}_r^0) ] \]
+	\[ \mathbf{T}_r = [\mathbf{R}_r (\mathbf{c_r} - \mathbf{R}_r \mathbf{c}_r^0) ] \]
 	
 	\subsubsection{Setting Particle Positions}
 	
-	Because we know the regions which each particle belongs to, we can place a goal position $\bold{g}$ using the average of the transformations for the regions containing it. We can then use the relative distance between original and goal positions of the particles, as well as the outside forces mentioned above, to find the velocities and then final positions of the particles as shown below.
+	Because we know the regions which each particle belongs to, we can place a goal position $\mathbf{g}$ using the average of the transformations for the regions containing it. We can then use the relative distance between original and goal positions of the particles, as well as the outside forces mentioned above, to find the velocities and then final positions of the particles as shown below.
 	
-	\[ \bold{v}(t+h) = \bold{v}(t) + \frac{\bold{g}(t) - \bold{x}(t)}{h} + h \frac{\bold{Forces}(t)}{m} \]
+	\[ mathbf{v}(t+h) = \mathbf{v}(t) + \frac{\mathbf{g}(t) - \mathbf{x}(t)}{h} + h \frac{\mathbf{Forces}(t)}{m} \]
 	
-	\[ \bold{x}(t+h) = \bold{x}(t) + h \bold{v}(t + h) \]
+	\[ \mathbf{x}(t+h) = \mathbf{x}(t) + h \mathbf{v}(t + h) \]
 	
 	\section{Optimizations}
 	There are many potential optimizations we can make, many of them included in the \cite{rivers} paper.
+	
 	\subsection{Fast Summation}
 	The main breakthrough of the paper was the introduction of a fast summation algorithm that stores as much information as possible to be reused in future computations. This has an especially large impact because of the reuse of sets of particles within each region.
 	
