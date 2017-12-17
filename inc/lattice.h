@@ -9,7 +9,8 @@ class Lattice {
 	std::vector<std::vector<std::vector<Particle> > > particles;
 	std::vector<Region> regions;
 	Cvec3 size;
-	Mesh orig_mesh;
+	Mesh *orig_mesh;
+	float t = 0;
 
 public:
 
@@ -18,7 +19,7 @@ public:
 	}
 
 	void create_lattice(Mesh mesh) {
-		orig_mesh = mesh;
+		orig_mesh = &mesh;
 		BoundingBox bbox = get_lattice_bounds(mesh);
 
 		//calculate size
@@ -55,9 +56,20 @@ public:
 				}
 			}
 		}
+	}
 
-		//for this example, one particle will be deforming
-		particles[0][0][0].goal_position[2] += 3;
+	void deform_timestep(Lattice lat, float delta_t) { //called like hair sim, on timer callback
+		/* //TODO:
+		
+		compute new COMs (Center of Mass) for regions, put in region.new_com
+		Perform least squares computation to find A_r
+		use polar decomposition library to find rotational component
+		apply rotations to regions, along with translation from com change
+		average the transformations of all subscribed regions and apply to particle position to get goal position
+		do physics v(t+delta_t) and x(t+delta_t) as shown in write-up to get actual values
+		move the particles to new positions and apply same translation to vertices to get squishy bunny!
+		
+		*/
 	}
 
 private:

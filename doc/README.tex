@@ -52,15 +52,27 @@
 	
 	Because we know the regions which each particle belongs to, we can place a goal position $\mathbf{g}$ using the average of the transformations for the regions containing it. We can then use the relative distance between original and goal positions of the particles, as well as the outside forces mentioned above, to find the velocities and then final positions of the particles as shown below.
 	
-	\[ mathbf{v}(t+h) = \mathbf{v}(t) + \frac{\mathbf{g}(t) - \mathbf{x}(t)}{h} + h \frac{\mathbf{Forces}(t)}{m} \]
+	\[ \mathbf{v}(t+h) = \mathbf{v}(t) + \frac{\mathbf{g}(t) - \mathbf{x}(t)}{h} + h \frac{\mathbf{Forces}(t)}{m} \]
 	
 	\[ \mathbf{x}(t+h) = \mathbf{x}(t) + h \mathbf{v}(t + h) \]
+	
+	Now that we have the final positions of the particles, we can move the associated vertices with the same transformations as the particles to make the mesh itself deform realistically.
+	
+	\section{What I Learned}
+	I learned quite a bit about graphics and deformable objects from this projects. Having worked with the bunny and the dynamic fur before this, I had an idea of how the dynamics might work, with spring like coefficients and the like. I had originally thought of doing a 3 dimensional grid of springs and point masses, like some of the cloth dynamics demos, but wanted to explore a deeper problem. I read through some other papers as well, such as \cite{JamesDoug1999Aart} which described much more complicated, but realistic, ways of deforming objects with volume preservation and many tunable parameters. The problem was that I couldn't fully understand the math they were using, so I moved on. \\
+	\indent I finally found the \cite{rivers} paper, which seemed to be much more in my reach mathematically. I first set out to understand the basic building blocks of the problem. It seems similar at first glance to the spring problem, with particles trying to stay within their regions, but it gives you more tunability for floppiness and area of effect when deformed than a straight up spring lattice will.
+	\indent One of the more interesting parts of the paper was the fast summation they used to precompute and reuse as many values as possible, and is why the paper is called FLSM. I will cover the way this works in Section 3. This was also good to learn, showing a way that we can significantly reduce processor time when doing summations by finding ways to reuse previously calculated values.
 	
 	\section{Optimizations}
 	There are many potential optimizations we can make, many of them included in the \cite{rivers} paper.
 	
 	\subsection{Fast Summation}
-	The main breakthrough of the paper was the introduction of a fast summation algorithm that stores as much information as possible to be reused in future computations. This has an especially large impact because of the reuse of sets of particles within each region.
+	The main breakthrough of the paper was the introduction of a fast summation algorithm that stores as much information as possible to be reused in future computations.
+	
+	\section{My Implementation}
+	I began by using the bunny mesh we had been using before. I generated a bounding box and rounded it up to the nearest grid square so that we could have integral particles. You can see this process in \texttt{lattice.h::get\_lattice\_bounds()}. I then assigned each grid square a particle and to that particle a set of vertices to share their transforms with. This is done in \texttt{Lattice::create\_lattice()} which then calls \texttt{Particle::setPosition()}. Next I started to assign regions. For simplicity I ignored the mesh when constructing particles and regions, and just used the expanded bounding box as our object. I created regions with half-width $\mathbf{w} = 1$, as shown in \texttt{particle.h:Region()}. All of the necessary values have been set in the particles. All that's left now is to find the centers of mass of the new regions, use the least squares rotation of the regions and apply those transforms to the particles and associated vertices.
+	\subsection{State of Affairs}
+	The code is not currently fully functional. I have created what I stated in Section 5, and have some comments detailing the approach for the rest in the code, marked with \texttt{//TODO:}. The most important pieces of pseudocode can be found in \texttt{Lattice::deform\_timestep()}, detailing the procedures to take and values to set in order to deform the bunny.
 	
 	\bibliographystyle{plainnat}
 	\bibliography{references}

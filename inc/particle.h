@@ -51,7 +51,8 @@ public:
 
 	Matrix4 displacement;
 	Cvec3 com;
-	Cvec3 goal_com;
+	Cvec3 new_com;
+	RigTForm T_r;
 	Cvec3 center_idx;
 	std::vector<Particle*> particles;
 	int w = 1;
@@ -69,13 +70,5 @@ public:
 				}
 			}
 		}
-	}
-
-	Cvec3 calculate_goal_com() {
-		goal_com = Cvec3();
-		for each (Particle* p in particles) {
-			goal_com += p->goal_position;
-		}
-		goal_com /= particles.size();
 	}
 };
